@@ -27,16 +27,16 @@ function _init()
     hoe = hoe()
   })
   player.equipment.tool = hoe.id
- end
+end
 
- function _update()
+function _update()
   if game_state==game_states.game then
     inputsystem()
     movementsystem()
     collisionsystem()
     hoesystem()
   end
- end
+end
 
 function _draw()
   cls()
@@ -45,20 +45,5 @@ function _draw()
   rendersystem()
 
   --debug
-  if debug then
-    for e in all(entities) do
-      if e.position and e.direction then
-        pset(
-          e.position.x + e.direction.x*8,
-          e.position.y + e.direction.y*8,
-          8
-        )
-      end
-    end
-    for i,str in pairs(debug_str) do
-      rectfill(1,i*6,127,(i+1)*6,0)
-      print(str,2,1+i*6,11)
-    end
-    debug_str = {}
-  end
+  render_debug()
 end

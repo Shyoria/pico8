@@ -64,9 +64,9 @@ end
 
 function collisionsystem()
   for e in all(entities) do
-    if e.position and e.movement
-      and (e.movement.x ~= 0 or e.movement.y ~= 0)
-      and e.collision and e.collision.type == "circle"
+    if e.position and e.movement and
+      (e.movement.x ~= 0 or e.movement.y ~= 0) and
+      e.collision and e.collision.type == "circle"
     then
       local newx = e.position.x + e.movement.x
       local newy = e.position.y + e.movement.y
@@ -133,7 +133,7 @@ function hoesystem()
 
       local exists = entitiesAt(x,y)
 
-      if #exists == 0 then
+      if #exists == 0 and fget(mget(x,y),0) == false then
         entity({
           position = position(x*8,y*8),
           sprite = sprite(23),
@@ -155,9 +155,7 @@ function triggersystem()
           end
         end
       end
-      if triggered == false then
-        e.trigger.active = false
-      end
+      e.trigger.active = triggered
     end
   end
 end

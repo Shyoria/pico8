@@ -1,6 +1,25 @@
 debug_str={}
 function debug(str)
- add(debug_str,str)
+  add(debug_str,str)
+end
+
+function render_debug()
+  if debug then
+    for e in all(entities) do
+      if e.position and e.direction then
+        pset(
+          e.position.x + e.direction.x*8,
+          e.position.y + e.direction.y*8,
+          8
+        )
+      end
+    end
+    for i,str in pairs(debug_str) do
+      rectfill(1,i*6,127,(i+1)*6,0)
+      print(str,2,1+i*6,11)
+    end
+    debug_str = {}
+  end
 end
 
 function solid(x,y)
@@ -14,37 +33,37 @@ function distance(a,b)
 end
 
 function in_range(value, _min, _max)
- return value >= min(_min,_max)
-  and value <= max(_min,_max)
+  return value >= min(_min,_max) and
+    value <= max(_min,_max)
 end
 
 function range_intersect(min0,max0,min1,max1)
- return max(min0,max0) >= min(min1,max1)
-  and min(min1,max1) >= max(min1,max1)
+  return max(min0,max0) >= min(min1,max1) and
+    min(min1,max1) >= max(min1,max1)
 end
 
 function circle_collision(c0,c1)
- return distance(c0,c1) < c0.radius + c1.radius
+  return distance(c0,c1) < c0.radius + c1.radius
 end
 
 function circle_point_collision(point, circle)
- return distance(point, circle) < circle.radius
+  return distance(point, circle) < circle.radius
 end
 
 function point_rect(p,r)
- return in_range(p.x, r.x, r.x + r.width)
-  and in_range(p.y, r.y, r.y + r.height)
+  return in_range(p.x, r.x, r.x + r.width) and
+    in_range(p.y, r.y, r.y + r.height)
 end
 
 function circle_rect(c,r)
- local dx = c.x - max(r.x, min(c.x, r.x + r.width))
- local dy = c.y - max(r.y, min(c.y, r.y + r.height))
- return (dx * dx + dy * dy) < (c.r * c.r)
+  local dx = c.x - max(r.x, min(c.x, r.x + r.width))
+  local dy = c.y - max(r.y, min(c.y, r.y + r.height))
+  return (dx * dx + dy * dy) < (c.r * c.r)
 end
 
 function rect_intersect(r0,r1)
- return range_intersect(r0.x, r0.x+r0.width, r1.x, r1.x+r1.width)
-  and range_intersect(r0.y, r0.y+r0.height,r1.y, r1.y+r1.height)
+  return range_intersect(r0.x, r0.x+r0.width, r1.x, r1.x+r1.width) and
+    range_intersect(r0.y, r0.y+r0.height,r1.y, r1.y+r1.height)
 end
 
 function touching(e,o)

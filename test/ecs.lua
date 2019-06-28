@@ -6,6 +6,7 @@ function entity(components)
   local e = {
     id = last_id
   }
+
   add(entities,e)
 
   for cname, component in pairs(components) do
