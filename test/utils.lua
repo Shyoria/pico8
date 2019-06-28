@@ -62,3 +62,27 @@ function touching(e,o)
     return false
   end
 end
+
+function entitiesAt(x,y)
+  local found = {}
+
+  for e in all(entities) do
+    if e.position and
+      flr(e.position.x / 8)==x and
+      flr(e.position.y / 8)==y
+    then
+      add(found,e)
+    end
+  end
+
+  return found
+end
+
+function enum(array)
+  local obj = {}
+  for k,v in pairs(array) do
+    obj[v] = k
+  end
+
+  return obj
+end

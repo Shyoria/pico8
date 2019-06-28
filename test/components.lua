@@ -48,8 +48,8 @@ end
 function sprite(id,xoffset,yoffset)
  local s={}
  s.id=id
- s.xoffset=xoffset
- s.yoffset=yoffset
+ s.xoffset=xoffset or 0
+ s.yoffset=yoffset or 0
 
  return s
 end
@@ -92,7 +92,7 @@ end
 
 function inventory()
   local i = {}
-  i.items = []
+  i.items = {}
   return i
 end
 

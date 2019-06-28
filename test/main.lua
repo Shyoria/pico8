@@ -1,10 +1,11 @@
 debug=true
 
-game_states = enum({"menu","game"})
-player_states = enum({""})
-actions = enum( {"talk","take","hoe","water","plant"})
 
 function _init()
+  game_states = enum({"menu","game"})
+  player_states = enum({""})
+  actions = enum( {"talk","take","hoe","water","plant"})
+
   game_state = game_states.game
 
 
@@ -22,6 +23,10 @@ function _init()
     render_direction = render_direction(),
     equipment = equipment()
   })
+  hoe = entity({
+    hoe = hoe()
+  })
+  player.equipment.tool = hoe.id
  end
 
  function _update()

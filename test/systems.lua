@@ -133,18 +133,7 @@ function hoesystem()
 
       local exists = entitiesAt(x,y)
 
-
-
-      for o in all(entities) do
-        if o.position then
-          if flr(o.position.x / 8)==tile.x and flr(o.position.y / 8)==tile.y then
-            -- something already exists here
-            exists = true
-          end
-        end
-      end
-
-      if !exists then
+      if #exists == 0 then
         entity({
           position = position(x*8,y*8),
           sprite = sprite(23),
